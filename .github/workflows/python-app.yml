@@ -1,0 +1,27 @@
+name: Run Python Script Every 30 Minutes
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Cada 15 minutos
+  workflow_dispatch:  # Permite ejecutarlo manualmente también
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run script
+        env:
+          MY_SECRET_PASSWORD: ${{ secrets.MY_SECRET_PASSWORD }}
+        run: python bot.py
+
