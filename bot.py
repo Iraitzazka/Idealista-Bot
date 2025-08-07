@@ -106,8 +106,8 @@ def main():
         guardar_anuncios(anuncios_actuales)
     else:
         print("Sin novedades.")
-        mensaje = [{'titulo': 'No hay novedades', 'precio': '', 'link': ''}]
-        enviar_email(mensaje)
+        # mensaje = [{'titulo': 'No hay novedades', 'precio': '', 'link': ''}]
+        # enviar_email(mensaje)
 
 if __name__ == "__main__":
     main()
