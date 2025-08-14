@@ -11,8 +11,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
 #Comentar las dos sigientes lineas para ejecutarlo en la nube
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # Configura aquí tu búsqueda
@@ -27,6 +27,8 @@ if not EMAIL_PASSWORD:
 EMAIL_RECEIVER = "iraitzazka@gmail.com"
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
+
+
 
 def extraer_anuncios(url):
     options = webdriver.ChromeOptions()
@@ -49,6 +51,10 @@ def extraer_anuncios(url):
     time.sleep(5)  # deja que cargue JS
 
     soup = BeautifulSoup(driver.page_source, "html.parser")
+
+    with open("debug.html", "w", encoding="utf-8") as f:
+        f.write(driver.page_source)
+
     driver.quit()
 
     anuncios = []

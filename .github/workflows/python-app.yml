@@ -37,3 +37,8 @@ jobs:
         with:
           name: anuncios-data
           path: anuncios_guardados.json
+      - name: Upload debug HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-html
+          path: debug.html
