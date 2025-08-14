@@ -10,9 +10,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
+#Comentar las dos sigientes lineas para ejecutarlo en la nube
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Configura aquí tu búsqueda
-SEARCH_URL = "https://www.idealista.com/areas/alquiler-habitacion/con-precio-hasta_450,sexo_chico/?shape=%28%28qaegGjrbQq%40oc%40%60m%40g%7BAfp%40ucAzBc%5E%60f%40en%40vc%40vdAyFbhBqr%40iCuUn%60AkzAtf%40%29%29"  # cambia a tu búsqueda
+SEARCH_URL = "https://www.idealista.com/areas/alquiler-habitacion/con-precio-hasta_450,sexo_chico/?shape=%28%28elggGjphQse%40iZaMka%40nKwv%40gl%40zKgEal%40xm%40yg%40xqAhCh_%40s%7B%40%7EbBieD%7BT%7Bi%40pk%40cyA%7E%5ExtA%60_%40h%7E%40wQ%60vBaf%40zYiLkp%40wQ%7Ey%40wjAnr%40gW%60%40%7DPlTbb%40a%40pYtf%40iAjp%40%7Bf%40tHge%40mEm%5DbkA%29%29"  # cambia a tu búsqueda
 DATA_FILE = "anuncios_guardados.json"
 
 # Configura el correo
@@ -25,7 +29,7 @@ SMTP_PORT = 587
 def extraer_anuncios(url):
     options = webdriver.ChromeOptions()
     options.add_argument("--log-level=3")  # Reduce el ruido en la consola
-    options.add_argument("--headless")  # quitar esto si quieres ver el navegador
+    # options.add_argument("--headless")  # quitar esto si quieres ver el navegador
     options.add_argument("--disable-blink-features=AutomationControlled")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
