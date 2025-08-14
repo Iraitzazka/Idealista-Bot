@@ -2,8 +2,8 @@ name: Run Python Script Every 30 Minutes
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Cada 15 minutos
-  workflow_dispatch:  # Permite ejecutarlo manualmente también
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
+      - name: Download previous data
+        uses: actions/download-artifact@v4
+        with:
+          name: anuncios-data
+          path: .
+        continue-on-error: true  # No falla si no existe artifact
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,3 +32,8 @@ jobs:
           MY_SECRET_PASSWORD: ${{ secrets.MY_SECRET_PASSWORD }}
         run: python bot.py
 
+      - name: Upload updated data
+        uses: actions/upload-artifact@v4
+        with:
+          name: anuncios-data
+          path: anuncios_guardados.json

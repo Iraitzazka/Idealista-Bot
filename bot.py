@@ -11,8 +11,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
 #Comentar las dos sigientes lineas para ejecutarlo en la nube
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 # Configura aquí tu búsqueda
@@ -22,6 +22,8 @@ DATA_FILE = "anuncios_guardados.json"
 # Configura el correo
 EMAIL_SENDER = "iraitzmate@gmail.com"
 EMAIL_PASSWORD = os.environ.get("MY_SECRET_PASSWORD")
+if not EMAIL_PASSWORD:
+    raise ValueError("La variable de entorno MY_SECRET_PASSWORD no está definida.")
 EMAIL_RECEIVER = "iraitzazka@gmail.com"
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
@@ -29,7 +31,7 @@ SMTP_PORT = 587
 def extraer_anuncios(url):
     options = webdriver.ChromeOptions()
     options.add_argument("--log-level=3")  # Reduce el ruido en la consola
-    # options.add_argument("--headless")  # quitar esto si quieres ver el navegador
+    options.add_argument("--headless")  # quitar esto si quieres ver el navegador
     options.add_argument("--disable-blink-features=AutomationControlled")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
